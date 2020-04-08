@@ -3,14 +3,9 @@ $CONFIG = '{"lang":"Ar","error_reporting":false,"show_hidden":false,"hide_Cols":
 define('VERSION', '2.4.1');
 define('APP_TITLE', 'File Manager');
 $use_auth = true;
-if (file_exists("password")){
-    $auth_users = array(
-        'admin' => file_get_contents("password"), 
-    );
-}else{
-    echo "file 'password not found !";
-    exit;
-}
+$auth_users = array(
+    'admin' => password_hash('kekopassword', PASSWORD_DEFAULT)
+);
 $directories_users = array();
 $use_highlightjs = true;
 $highlightjs_style = 'vs';
